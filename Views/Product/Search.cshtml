@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ProductModel>
+
+<style>
+    #searchResults {
+        margin: 0 auto; /* Căn lề nội dung ra giữa */
+        width: 80%; /* Độ rộng của phần kết quả tìm kiếm */
+    }
+
+    .product-details p {
+        font-size: 2.2rem; /* Điều chỉnh kích thước chữ cho mô tả */
+    }
+</style>
+
+
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-3">
+            @Html.Partial("_SidebarPartial")
+        </div>
+        <div class="col-md-9">
+            <div class="features_items">
+                <!--features_items-->
+                <h2 class="title text-center">Search Results</h2>
+                <div id="searchResults">
+                    @if (Model.Any())
+                    {
+                        @foreach (var product in Model)
+                        {
+                            <!-- Hiển thị thông tin sản phẩm từ Model -->
+                            <div>
+                                <h1><img src="~/media/products/@product.Image" alt="@product.Name" width="50%" /></h1>
+                                <h4>Name: @product.Name</h4>
+                                <h4>Price: @product.Price đ</h4>
+                                <h4>Author: @product.Author</h4>
+                                <h4>Publicser: @product.Publicser</h4>
+                                <p>Description: @product.Description</p>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No results found.</p>
+                    }
+                </div>
+            </div><!--features_items-->
+        </div>
+    </div>
+</div>

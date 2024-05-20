@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ProductModel>
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: flex-start; /* Giữ nội dung ở phía trên */
+        width: 100%;
+        padding-top: 20px; /* Tùy chọn: Thêm khoảng cách phía trên */
+    }
+
+    .row {
+        width: 100%;
+        justify-content: center; /* Đảm bảo các mục trong hàng được căn giữa */
+    }
+
+    .col-sm-9 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .features_items {
+        width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng của container */
+        text-align: center;
+    }
+
+    .product-image-wrapper {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .productinfo {
+        text-align: center;
+    }
+
+    .nav {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .nav li {
+            margin: 0 5px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: black; /* Thay đổi màu sắc của các mục menu nếu cần */
+            white-space: nowrap; /* Đảm bảo các mục menu không bị xuống dòng */
+        }
+
+
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-9 padding-right">
+            <div class="features_items">
+                <!--features_items-->
+                <h2 class="title text-center">All Items</h2>
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-4">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <a asp-action="Details" asp-controller="Product" asp-route-Id="@item.Id">
+                                        <img src="~/media/products/@item.Image" alt="@item.Name" width="100%" />
+                                        <h2>₫@item.Price</h2>
+                                        <p>@item.Name</p>
+                                        <p>Category : @item.Category.Name</p>
+                                        <p>Brand : @item.Brand.Name</p>
+                                    </a>
+                                    <a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-ID="@item.Id"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                </div>
+                            </div>
+                            <div class="choose">
+                                <ul class="nav nav-pills nav-justified">
+                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div><!--features_items-->
+        </div>
+    </div>
+</div>
